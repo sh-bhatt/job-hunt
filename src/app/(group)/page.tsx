@@ -2,18 +2,22 @@
 
 import JobCard from "@/components/cards/job-card";
 import data from "@/data";
-import Header from "@/components/header";
 
-export default function Home() {
-  const jobs = data.data
+
+export default async function Home() {
+  // const jobs = data.data
+
+    const res = await fetch(`http://localhost:3000/api/search`)
+    const data = await res.json();
+    const jobs = data.data
 
   return (
       <main>
-        <Header/>
+        
         <div className="flex flex-wrap gap-4 justify-center mt-2">
           {
           jobs.map(job => (
-            <JobCard key={job.job_id} item={job}/>
+            <JobCard key={job.id} item={job}/>
           ))
         }
         </div>

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-
-import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
 
 export const metadata: Metadata = {
@@ -14,9 +12,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body>
-                <Header />
+        <div>
+                
                 <div className="flex gap-7">
 
                     <div >
@@ -26,8 +23,6 @@ export default function RootLayout({
                         {children}
                     </div>
                 </div>
-
-            </body>
-        </html>
+        </div>
     );
 }
