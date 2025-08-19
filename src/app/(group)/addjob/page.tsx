@@ -33,7 +33,7 @@ export default function AddJobPage() {
         })
         
         const resData = await res.json();
-        if(resData)
+        if(resData){}
     }
     
   return (
