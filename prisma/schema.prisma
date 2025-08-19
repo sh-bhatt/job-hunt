@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -20,30 +14,31 @@ model User {
   password    String
   role        String        @default("user")
   company     Company?
-  Review      Review[]
-  Application Application[]
+  reviews     Review[]
+  applications Application[]
 }
 
 model Company {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  ownerId     String @unique @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId     String   @unique @db.ObjectId
   name        String
   description String
-  owner       User   @relation(fields: [ownerId], references: [id])
-  jobs        Job[]
+  owner       User     @relation(fields: [ownerId], references: [id])
+  jobs        Job[]    // ✅ fixed relation
+  reviews     Review[]
 }
 
 model Job {
-  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
   title        String
   description  String
   location     String
   salary       Int
-  job_category String @default("fulltime")
-  job_type     String @default("on-site")
-  companyId    String @db.ObjectId
-
-  company Company @relation(fields: [companyId], references: [id])
+  job_category String        @default("fulltime")
+  job_type     String        @default("on-site")
+  companyId    String        @db.ObjectId
+  company      Company       @relation(fields: [companyId], references: [id])
+  applications Application[]
 }
 
 model Review {
@@ -51,12 +46,14 @@ model Review {
   content   String
   authorId  String @db.ObjectId
   author    User   @relation(fields: [authorId], references: [id])
-  companyId String
+  companyId String @db.ObjectId
+  company   Company @relation(fields: [companyId], references: [id])
 }
 
 model Application {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
-  jobId String @db.ObjectId
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId String   @db.ObjectId
+  user   User     @relation(fields: [userId], references: [id])
+  jobId  String   @db.ObjectId
+  job    Job      @relation(fields: [jobId], references: [id])  // ✅ corrected relation
 }

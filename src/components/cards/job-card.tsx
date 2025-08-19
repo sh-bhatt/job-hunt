@@ -53,7 +53,7 @@ export default function JobCard({ item }: { item: job }) {
 
             <Flex direction="column" align="end" mt="4" className="text-xs text-gray-400">
               <Link href={`/company/${item.company.id}`} className="hover:underline">
-                {item.company.name}
+                {item?.company?.name}
               </Link>
               <Text>{item.company.owner.email}</Text>
             </Flex>

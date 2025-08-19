@@ -90,6 +90,7 @@ export default function Header() {
           <CircleUserRound size={36} />
           <span>{user?.email}</span>
         </div>
+        <Link href='/applied-jobs'>Your job applications</Link>
 
         {/* Logout */}
         <LogoutBtn />

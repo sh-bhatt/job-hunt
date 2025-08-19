@@ -99,8 +99,8 @@ export default function Signin() {
 
           <p className="mt-10 text-center text-sm text-gray-400">
             Already have an account?{" "}
-            <Link href="/signup" className="font-semibold text-white hover:text-gray-300">
-              Register
+            <Link href="/login" className="font-semibold text-white hover:text-gray-300">
+              Login
             </Link>
           </p>
         </div>
