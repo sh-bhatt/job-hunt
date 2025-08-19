@@ -46,7 +46,7 @@ export default async function Search({ searchParams } : {searchParams : searchPa
                         return (
                             <div key={index} className="flex felx-col">
                                 <div>
-                                    <JobCard item={job} />
+                                    <JobCard job={job} />
                                 </div>
                             </div>
                         )
